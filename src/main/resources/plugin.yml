@@ -1,0 +1,18 @@
+name: XrayDetector
+version: '${project.version}'
+main: ru.deelter.xraydetector.XrayDetector
+api-version: 1.18
+authors: [ DeelTer ]
+description: Detect if user break too many blocks
+website: https://github.com/deelter
+softdepend: [ CoreProtect ]
+commands:
+  xraydetector:
+    aliases: [xdetector]
+    description: main command
+    permission: xray.detector
+    permission-message: No enough permissions
+permissions:
+  xray.detector:
+    description: main command
+    default: op

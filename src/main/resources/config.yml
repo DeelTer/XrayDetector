@@ -1,0 +1,11 @@
+hooks:
+  coreprotect: false
+limits:
+  diamonds:
+    material: DIAMOND_ORE
+    amount: 25
+    minutes: 5
+  iron:
+    material: IRON_ORE
+    amount: 60
+    minutes: 5
