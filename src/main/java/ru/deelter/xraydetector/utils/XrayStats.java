@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import ru.deelter.xraydetector.XrayDetector;
 import ru.deelter.xraydetector.blocks.BlockLimit;
-import ru.deelter.xraydetector.blocks.XrayBlockManager;
+import ru.deelter.xraydetector.blocks.BlockLimitManager;
 
 public class XrayStats {
 
@@ -40,7 +40,7 @@ public class XrayStats {
 	}
 
 	public boolean isSessionExpired() {
-		BlockLimit blockLimit = XrayBlockManager.getLimit(this.material);
+		BlockLimit blockLimit = BlockLimitManager.getLimit(this.material);
 		if (blockLimit == null) return false;
 		long differenceMinutes = (System.currentTimeMillis() - this.lastAccessMillis) / 1000 / 60;
 		return differenceMinutes >= blockLimit.getMinutes();

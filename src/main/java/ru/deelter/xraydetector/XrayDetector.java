@@ -1,7 +1,7 @@
 package ru.deelter.xraydetector;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.deelter.xraydetector.blocks.XrayBlockManager;
+import ru.deelter.xraydetector.blocks.BlockLimitManager;
 import ru.deelter.xraydetector.commands.XrayDetectorCommand;
 import ru.deelter.xraydetector.hooks.CoreProtectHook;
 import ru.deelter.xraydetector.blocks.BlockBreakListener;
@@ -26,7 +26,7 @@ public final class XrayDetector extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		CoreProtectHook.load(this);
-		XrayBlockManager.load(this);
+		BlockLimitManager.load(this);
 		XrayPlayerManager.setup(this);
 		BlockBreakListener.load(this);
 		XrayDetectorCommand.load(this);

@@ -28,7 +28,7 @@ public class BlockBreakListener implements Listener {
 	public void onBreak(@NotNull BlockBreakEvent event) {
 		Block block = event.getBlock();
 		Material material = block.getType();
-		BlockLimit blockLimit = XrayBlockManager.getLimit(material);
+		BlockLimit blockLimit = BlockLimitManager.getLimit(material);
 		if (blockLimit == null) return; // No tracking
 		if (CoreProtectHook.isLoaded()) {
 			// TODO Refactoring. Huge optimization-dead code

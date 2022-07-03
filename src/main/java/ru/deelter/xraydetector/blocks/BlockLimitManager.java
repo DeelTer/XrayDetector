@@ -10,7 +10,7 @@ import ru.deelter.xraydetector.XrayDetector;
 import java.util.HashMap;
 import java.util.Map;
 
-public class XrayBlockManager {
+public class BlockLimitManager {
 
 	private static final Map<Material, BlockLimit> LIMITS = new HashMap<>();
 
