@@ -3,6 +3,7 @@ package ru.deelter.xraydetector.player.suspected;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import ru.deelter.xraydetector.XrayDetector;
 import ru.deelter.xraydetector.player.XrayPlayer;
@@ -59,16 +60,7 @@ public class SuspectedPlayersDatabase {
 		try (Connection con = DATABASE.openConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				List<XrayStats> stats = new ArrayList<>();
-				JsonElement statsArray = JsonParser.parseString(rs.getString("stats"));
-				for (JsonElement element : statsArray.getAsJsonArray()) {
-					XrayStats statsData = new XrayStats(element.getAsJsonObject());
-					stats.add(statsData);
-				}
-				UUID uuid = UUID.fromString(rs.getString("uuid"));
-				String name = rs.getString("name");
-
-				SuspectedPlayer suspected = new SuspectedPlayer(uuid, name, stats);
+				SuspectedPlayer suspected = formSuspectedPlayer(rs);
 				suspectedPlayers.add(suspected);
 			}
 		} catch (SQLException e) {
@@ -77,4 +69,40 @@ public class SuspectedPlayersDatabase {
 		return suspectedPlayers;
 	}
 
+	public static synchronized @NotNull List<SuspectedPlayer> loadLastSuspected(int maxCount) {
+		List<SuspectedPlayer> suspectedPlayers = new ArrayList<>();
+		String sql = "SELECT * FROM players ORDER BY 'logged_time' LIMIT '" + maxCount + "';";
+		try (Connection con = DATABASE.openConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				SuspectedPlayer suspected = formSuspectedPlayer(rs);
+				suspectedPlayers.add(suspected);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return suspectedPlayers;
+	}
+
+	@Contract("_ -> new")
+	private static @NotNull SuspectedPlayer formSuspectedPlayer(@NotNull ResultSet rs) throws SQLException {
+		List<XrayStats> stats = new ArrayList<>();
+		JsonElement statsArray = JsonParser.parseString(rs.getString("stats"));
+		for (JsonElement element : statsArray.getAsJsonArray()) {
+			XrayStats statsData = new XrayStats(element.getAsJsonObject());
+			stats.add(statsData);
+		}
+		UUID uuid = UUID.fromString(rs.getString("uuid"));
+		String name = rs.getString("name");
+		return new SuspectedPlayer(uuid, name, stats);
+	}
+
+	public static void deletePlayer(@NotNull UUID uuid) {
+		String sql = String.format("DELETE FROM players WHERE `uuid` = '%s' ", uuid);
+		try (Connection con = DATABASE.openConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

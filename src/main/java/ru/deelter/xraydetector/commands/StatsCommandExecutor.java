@@ -8,7 +8,7 @@ import ru.deelter.xraydetector.player.suspected.SuspectedPlayersDatabase;
 
 import java.util.List;
 
-public class StatsCommand {
+public class StatsCommandExecutor {
 
 	public static void execute(CommandSender sender, String @NotNull [] args) {
 		if (args.length < 2) {

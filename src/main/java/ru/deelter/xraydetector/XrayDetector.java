@@ -5,6 +5,7 @@ import ru.deelter.xraydetector.blocks.BlockLimitManager;
 import ru.deelter.xraydetector.commands.XrayDetectorCommand;
 import ru.deelter.xraydetector.hooks.CoreProtectHook;
 import ru.deelter.xraydetector.blocks.BlockBreakListener;
+import ru.deelter.xraydetector.menus.XrayMenuManager;
 import ru.deelter.xraydetector.player.XrayPlayerManager;
 import ru.deelter.xraydetector.player.suspected.SuspectedPlayersDatabase;
 
@@ -28,8 +29,9 @@ public final class XrayDetector extends JavaPlugin {
 		CoreProtectHook.load(this);
 		BlockLimitManager.load(this);
 		XrayPlayerManager.setup(this);
-		BlockBreakListener.load(this);
+		BlockBreakListener.init(this);
 		XrayDetectorCommand.load(this);
+		XrayMenuManager.load(this);
 		this.getLogger().info("Plugin successfully loaded!");
 	}
 

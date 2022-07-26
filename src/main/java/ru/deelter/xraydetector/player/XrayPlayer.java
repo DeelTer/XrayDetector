@@ -31,8 +31,8 @@ public class XrayPlayer {
 	}
 
 	public String getName() {
-		Player player = this.getPlayer();
-		return player == null ? "unknown" : player.getName();
+		String name = Bukkit.getOfflinePlayer(uuid).getName();
+		return name == null ? "unknown" : name;
 	}
 
 	@Nullable
@@ -64,12 +64,12 @@ public class XrayPlayer {
 	public void applySuspected() {
 		this.suspected = true;
 
-		String info = formSuspectLog();
+		String info = applySuspectLog();
 		XrayDetector.getInstance().getLogger().warning(info);
 		XrayLoggerManager.log(info);
 	}
 
-	private @NotNull String formSuspectLog() {
+	private @NotNull String applySuspectLog() {
 		String name = this.getName();
 		StringBuilder sb = new StringBuilder(String.format("Suspected user %s [uuid: %s]", name, this.uuid));
 		for (XrayStats stats : statistic.values())

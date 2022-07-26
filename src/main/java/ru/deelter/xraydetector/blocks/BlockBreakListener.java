@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class BlockBreakListener implements Listener {
 
-	public static void load(XrayDetector instance) {
+	public static void init(XrayDetector instance) {
 		Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), instance);
 	}
 

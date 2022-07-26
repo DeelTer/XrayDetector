@@ -27,7 +27,8 @@ public class XrayDetectorCommand implements CommandExecutor {
 		}
 		String firstArg = args[0];
 		switch (firstArg) {
-			case "stats" -> StatsCommand.execute(sender, args);
+			case "export" -> StatsCommandExecutor.execute(sender, args);
+			case "menu" -> StatsMenuCommandExecutor.execute(sender, args);
 		}
 		return true;
 	}
