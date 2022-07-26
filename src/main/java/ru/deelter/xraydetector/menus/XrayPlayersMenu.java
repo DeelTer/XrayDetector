@@ -56,7 +56,6 @@ public class XrayPlayersMenu implements InventoryHolder {
 
 				PlayerProfile profile = Bukkit.createProfile(player.getUuid());
 				skullMeta.setPlayerProfile(profile);
-
 				playerIcon.setItemMeta(skullMeta);
 				this.icons.add(playerIcon);
 			}

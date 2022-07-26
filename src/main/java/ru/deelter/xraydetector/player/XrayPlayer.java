@@ -15,6 +15,7 @@ import ru.deelter.xraydetector.utils.XrayStats;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class XrayPlayer {
 
@@ -87,6 +88,6 @@ public class XrayPlayer {
 	}
 
 	public void saveToDatabase() {
-		SuspectedPlayersDatabase.savePlayer(this);
+		Bukkit.getScheduler().runTaskAsynchronously(XrayDetector.getInstance(), () -> SuspectedPlayersDatabase.savePlayer(this));
 	}
 }
