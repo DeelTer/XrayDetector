@@ -19,7 +19,7 @@ public class XrayMenuManager {
 		Bukkit.getScheduler().runTaskTimerAsynchronously(instance, () -> {
 			MENU.clearPlayers();
 			MENU.loadPlayers();
-		}, 0, 300 * 20L);
+		}, 0, 600 * 20L);
 		XrayMenuListener.init(instance);
 	}
 }

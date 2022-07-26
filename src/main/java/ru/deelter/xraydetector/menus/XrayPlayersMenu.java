@@ -43,7 +43,7 @@ public class XrayPlayersMenu implements InventoryHolder {
 		}
 		else {
 			for (SuspectedPlayer player : players) {
-				String name = "&6" + player.getName();
+				String name = "&c" + player.getName();
 				List<String> lore = getStatisticAsLore(player.getStatistic());
 				lore.add(" ");
 				lore.add("&fЛКМ &7просмотр истории CoreProtect");
